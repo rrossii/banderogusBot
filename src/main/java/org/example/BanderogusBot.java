@@ -51,12 +51,20 @@ public class BanderogusBot extends TelegramLongPollingBot {
                     "Обери завдання, щоб перейти на наступний рівень"
             );
 
+            List<String> buttons = Arrays.asList(
+                    "Сплести маскувальну сітку (+15 монет)",
+                    "Зібрати кошти патріотичними піснями (+15 монет)",
+                    "Вступити в Міністерство Мемів України (+15 монет)",
+                    "Запустити волонтерську акцію (+15 монет)",
+                    "Вступити до лав тероборони (+15 монет)"
+            );
+
+            buttons = getRandomThreeTasks(buttons);
+
             attachButtons(message, Map.of(
-                    "Сплести маскувальну сітку (+15 монет)", "level_1_btn",
-                    "Зібрати кошти патріотичними піснями (+15 монет)", "level_1_btn",
-                    "Вступити в Міністерство Мемів України (+15 монет) ", "level_1_btn",
-                    "Запустити волонтерську акцію (+15 монет)", "level_1_btn",
-                    "Вступити до лав тероборони (+15 монет)", "level_1_btn"
+                    buttons.get(0), "level_1_btn",
+                    buttons.get(1), "level_1_btn",
+                    buttons.get(2), "level_1_btn"
             ));
 
 
@@ -75,12 +83,20 @@ public class BanderogusBot extends TelegramLongPollingBot {
                         "Обери завдання, щоб перейти на наступний рівень"
                 );
 
+                List<String> buttons = Arrays.asList(
+                        "Зібрати комарів для нової біологічної зброї (+15 монет)",
+                        "Пройти курс молодого бійця (+15 монет)",
+                        "Задонатити на ЗСУ (+15 монет)",
+                        "Збити дрона банкою огірків (+15 монет)",
+                        "Зробити запаси коктейлів Молотова (+15 монет)"
+                );
+
+                buttons = getRandomThreeTasks(buttons);
+
                 attachButtons(message, Map.of(
-                        "Зібрати комарів для нової біологічної зброї (+15 монет)", "level_2_btn",
-                        "Пройти курс молодого бійця (+15 монет)", "level_2_btn",
-                        "Задонатити на ЗСУ (+15 монет)", "level_2_btn",
-                        "Збити дрона банкою огірків (+15 монет)", "level_2_btn",
-                        "Зробити запаси коктейлів Молотова (+15 монет)", "level_2_btn"
+                        buttons.get(0), "level_2_btn",
+                        buttons.get(1), "level_2_btn",
+                        buttons.get(2), "level_2_btn"
                 ));
 
                 message.setChatId(chatId);
@@ -97,13 +113,19 @@ public class BanderogusBot extends TelegramLongPollingBot {
                         "Баланс: 35 монет. \n" +
                         "Обери завдання, щоб перейти на наступний рівень"
                 );
+                List<String> buttons = Arrays.asList(
+                        "Злітати на тестовий рейд по чотирьох позиціях (+15 монет)",
+                        "Відвезти гуманітарку на передок (+15 монет)",
+                        "Знайти зрадника та здати в СБУ (+15 монет)",
+                        "Навести арту на орків (+15 монет)",
+                        "Притягнути танк трактором (+15 монет)"
+                );
+                buttons = getRandomThreeTasks(buttons);
 
                 attachButtons(message, Map.of(
-                        "Злітати на тестовий рейд по чотирьох позиціях (+15 монет)", "level_3_btn",
-                        "Відвезти гуманітарку на передок (+15 монет)", "level_3_btn",
-                        "Знайти зрадника та здати в СБУ (+15 монет)", "level_3_btn",
-                        "Навести арту на орків (+15 монет)", "level_3_btn",
-                        "Притягнути танк трактором (+15 монет)", "level_3_btn"
+                        buttons.get(0), "level_3_btn",
+                        buttons.get(1), "level_3_btn",
+                        buttons.get(2), "level_3_btn"
                 ));
 
                 message.setChatId(chatId);
@@ -194,5 +216,12 @@ public class BanderogusBot extends TelegramLongPollingBot {
 
     public void setLevel(Long chatId, int level) {
         levels.put(chatId, level);
+    }
+
+    public List<String> getRandomThreeTasks(List<String> allTasks) {
+        ArrayList<String> copy = new ArrayList<>(allTasks);
+        Collections.shuffle(copy);
+
+        return copy.subList(0, 3);
     }
 }
